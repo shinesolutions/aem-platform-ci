@@ -1,0 +1,9 @@
+aws:
+  region: ap-southeast-2
+
+ci:
+  aws:
+    s3:
+      bucket_name: aemopencloud-ci
+    iam:
+      role_arn: arn:aws:iam::918473058104:role/packer-aem-codebuild-role

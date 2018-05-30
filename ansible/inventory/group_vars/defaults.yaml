@@ -1,0 +1,24 @@
+aws:
+  region: ap-southeast-2
+
+ci:
+  aws:
+    hosts:
+      - platform_type: aws
+        os_type: rhel7
+      - platform_type: docker
+        os_type: centos7
+    aem_versions:
+      - aem62
+      - aem63
+      - aem64
+    components:
+      - java
+      - author
+      - publish
+      - dispatcher
+      - author-publish-dispatcher
+    s3:
+      bucket_name: overwrite-me
+    iam:
+      role_arn: overwrite-me

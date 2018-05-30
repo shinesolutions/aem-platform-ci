@@ -1,0 +1,16 @@
+ansible/playbooks/*.retry
+bin/
+.tmp/
+/modules/
+templates/_archive/
+.idea/
+packer_cache/
+Gemfile.lock
+.DS_Store
+stage/
+*.pem
+logs/
+.gem
+crash.log
+.bundle/
+.gems/
