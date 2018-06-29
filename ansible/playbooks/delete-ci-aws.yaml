@@ -6,7 +6,7 @@
 
   tasks:
 
-    - name: Delete CodePipeline pipelines
+    - name: Delete Packer AEM CodePipeline pipelines
       shell: |
         aws codepipeline delete-pipeline \
         --name packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }} \
@@ -15,7 +15,7 @@
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
 
-    - name: Delete CodeBuild projects
+    - name: Delete Packer AEM CodeBuild projects
       shell: |
         aws codebuild delete-project \
         --name packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }} \
