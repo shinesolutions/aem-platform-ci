@@ -10,9 +10,9 @@ lint:
 	ansible-lint ansible/playbooks/*.yaml
 
 create-ci-aws:
-	scripts/run-playbook.sh create-ci-aws "${config_path}"
+	scripts/run-playbook.sh packer-aem/create-ci-aws "${config_path}"
 
 delete-ci-aws:
-	scripts/run-playbook.sh delete-ci-aws "${config_path}"
+	scripts/run-playbook.sh packer-aem/delete-ci-aws "${config_path}"
 
 .PHONY: ci clean deps lint create-ci-aws delete-ci-aws
