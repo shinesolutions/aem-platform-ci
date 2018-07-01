@@ -1,0 +1,48 @@
+---
+- name: Create AEM AWS Stack Builder CI on AWS CodeBuild and CodePipeline
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: Ensure stage directory exists
+      file: path=../../../stage/ci-aws/ state=directory
+
+    - name: Generate AEM AWS Stack Builder CodeBuild project input JSON files
+      template:
+        src: ../../templates/aem-aws-stack-builder/codebuild-project.j2
+        dest: ../../../stage/ci-aws/aem-aws-stack-builder-codebuild-{{ item[0].os_type }}-{{ item[1] }}.yaml
+        mode: 0644
+      with_nested:
+        - "{{ ci.aws.hosts }}"
+        - "{{ ci.aws.aem_versions }}"
+
+    - name: Create AEM AWS Stack Builder CodeBuild projects
+      shell: |
+        aws codebuild create-project \
+        --name aem-aws-stack-builder-{{ item[0].os_type }}-{{ item[1] }} \
+        --cli-input-json file://../../../stage/ci-aws/aem-aws-stack-builder-codebuild-{{ item[0].os_type }}-{{ item[1] }}.yaml \
+        --region {{ aws.region }} \
+        --badge-enabled
+      with_nested:
+        - "{{ ci.aws.hosts }}"
+        - "{{ ci.aws.aem_versions }}"
+
+    - name: Generate AEM AWS Stack Builder CodePipeline pipeline input JSON files
+      template:
+        src: ../../templates/aem-aws-stack-builder/codepipeline-pipeline.j2
+        dest: ../../../stage/ci-aws/aem-aws-stack-builder-codepipeline-{{ item[0].os_type }}-{{ item[1] }}.yaml
+        mode: 0644
+      with_nested:
+        - "{{ ci.aws.hosts }}"
+        - "{{ ci.aws.aem_versions }}"
+
+    - name: Create AEM AWS Stack Builder CodePipeline pipelines
+      shell: |
+        aws codepipeline create-pipeline \
+        --cli-input-json file://../../../stage/ci-aws/aem-aws-stack-builder-codepipeline-{{ item[0].os_type }}-{{ item[1] }}.yaml \
+        --region {{ aws.region }}
+      with_nested:
+        - "{{ ci.aws.hosts }}"
+        - "{{ ci.aws.aem_versions }}"

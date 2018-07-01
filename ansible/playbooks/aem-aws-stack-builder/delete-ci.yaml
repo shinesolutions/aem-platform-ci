@@ -1,0 +1,25 @@
+---
+- name: Delete AEM AWS Stack Builder CI on AWS CodeBuild and CodePipeline
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: Delete AEM AWS Stack Builder CodePipeline pipelines
+      shell: |
+        aws codepipeline delete-pipeline \
+        --name aem-aws-stack-builder-{{ item[0].os_type }}-{{ item[1] }} \
+        --region {{ aws.region }}
+      with_nested:
+        - "{{ ci.aws.hosts }}"
+        - "{{ ci.aws.aem_versions }}"
+
+    - name: Delete AEM AWS Stack Builder CodeBuild projects
+      shell: |
+        aws codebuild delete-project \
+        --name aem-aws-stack-builder-{{ item[0].os_type }}-{{ item[1] }} \
+        --region {{ aws.region }}
+      with_nested:
+        - "{{ ci.aws.hosts }}"
+        - "{{ ci.aws.aem_versions }}"
