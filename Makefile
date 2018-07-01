@@ -9,10 +9,16 @@ deps:
 lint:
 	ansible-lint ansible/playbooks/*.yaml
 
-create-ci-aws:
+create-packer-aem:
 	scripts/run-playbook.sh packer-aem/create-ci-aws "${config_path}"
 
-delete-ci-aws:
+create-aem-aws-stack-builder:
+	scripts/run-playbook.sh aem-aws-stack-builder/create-ci "${config_path}"
+
+delete-packer-aem:
 	scripts/run-playbook.sh packer-aem/delete-ci-aws "${config_path}"
+
+delete-aem-aws-stack-builder:
+	scripts/run-playbook.sh aem-aws-stack-builder/delete-ci "${config_path}"
 
 .PHONY: ci clean deps lint create-ci-aws delete-ci-aws

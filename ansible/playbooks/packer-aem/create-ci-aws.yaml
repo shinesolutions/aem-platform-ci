@@ -1,5 +1,5 @@
 ---
-- name: Create Packer AEM internal CI on AWS CodeBuild and CodePipeline
+- name: Create Packer AEM CI on AWS CodeBuild and CodePipeline
   hosts: localhost
   gather_facts: no
   connection: local
@@ -11,8 +11,8 @@
 
     - name: Generate Packer AEM CodeBuild project input JSON files
       template:
-        src: ../templates/packer-aem/codebuild-project.j2
-        dest: ../../stage/ci-aws/packer-aem-codebuild-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }}.yaml
+        src: ../../templates/packer-aem/codebuild-project.j2
+        dest: ../../../stage/ci-aws/packer-aem-codebuild-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }}.yaml
         mode: 0644
       with_nested:
         - "{{ ci.aws.hosts }}"
@@ -23,7 +23,7 @@
       shell: |
         aws codebuild create-project \
         --name packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }} \
-        --cli-input-json file://../../stage/ci-aws/packer-aem-codebuild-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }}.yaml \
+        --cli-input-json file://../../../stage/ci-aws/packer-aem-codebuild-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }}.yaml \
         --region {{ aws.region }} \
         --badge-enabled
       with_nested:
@@ -33,8 +33,8 @@
 
     - name: Generate Packer AEM CodePipeline pipeline input JSON files
       template:
-        src: ../templates/packer-aem/codepipeline-pipeline.j2
-        dest: ../../stage/ci-aws/packer-aem-codepipeline-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}.yaml
+        src: ../../templates/packer-aem/codepipeline-pipeline.j2
+        dest: ../../../stage/ci-aws/packer-aem-codepipeline-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}.yaml
         mode: 0644
       with_nested:
         - "{{ ci.aws.hosts }}"
@@ -43,7 +43,7 @@
     - name: Create Packer AEM CodePipeline pipelines
       shell: |
         aws codepipeline create-pipeline \
-        --cli-input-json file://../../stage/ci-aws/packer-aem-codepipeline-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}.yaml \
+        --cli-input-json file://../../../stage/ci-aws/packer-aem-codepipeline-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}.yaml \
         --region {{ aws.region }}
       with_nested:
         - "{{ ci.aws.hosts }}"
