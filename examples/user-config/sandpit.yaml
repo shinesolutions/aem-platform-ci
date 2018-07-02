@@ -4,6 +4,6 @@ aws:
 ci:
   aws:
     s3:
-      bucket_name: aemopencloud-ci
+      bucket_name: aem-opencloud-ci
     iam:
       role_arn: arn:aws:iam::918473058104:role/packer-aem-codebuild-role
