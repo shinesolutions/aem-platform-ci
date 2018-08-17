@@ -6,6 +6,8 @@ ci:
     hosts:
       - platform_type: aws
         os_type: rhel7
+      - platform_type: aws
+        os_type: amazon-linux2
       - platform_type: docker
         os_type: centos7
     aem_versions:
