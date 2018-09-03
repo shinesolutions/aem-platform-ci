@@ -23,5 +23,5 @@ Usage
 
 - Set up the required [AWS resources](https://github.com/shinesolutions/aem-platform-ci/blob/master/examples/aws/resources.yaml)
 - Create [configuration file](https://github.com/shinesolutions/aem-platform-ci/blob/master/docs/configuration.md)
-- Create the build projects and pipelines: `make create-ci-aws config_path=<path/to/config/dir>`
-- Delete the build projects and pipelines: `make delete-ci-aws config_path=<path/to/config/dir>`
+- Create the build projects and pipelines: `make create-packer-aem create-aem-aws-stack-builder config_path=<path/to/config/dir>`
+- Delete the build projects and pipelines: `make delete-packer-aem delete-aem-aws-stack-builder config_path=<path/to/config/dir>`
