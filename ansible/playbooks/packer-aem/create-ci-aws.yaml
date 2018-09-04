@@ -7,7 +7,7 @@
   tasks:
 
     - name: Ensure stage directory exists
-      file: path=../../stage/ci-aws/ state=directory
+      file: path=../../../stage/ci-aws/ state=directory
 
     - name: Generate Packer AEM CodeBuild project input JSON files
       template:
