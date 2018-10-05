@@ -27,6 +27,11 @@
     "type": "LINUX_CONTAINER",
     "environmentVariables": [
       {
+        "name": "PLATFORM_TYPE",
+        "value": "aws",
+        "type": "PLAINTEXT"
+      },
+      {
         "name": "OS_TYPE",
         "value": "{{ item[0].os_type }}",
         "type": "PLAINTEXT"
