@@ -7,7 +7,7 @@ deps:
 	pip install -r requirements.txt
 
 lint:
-	ansible-lint ansible/playbooks/*.yaml
+	ansible-lint ansible/playbooks/*/*.yaml
 
 create-packer-aem:
 	scripts/run-playbook.sh packer-aem/create-ci-aws "${config_path}"
