@@ -9,18 +9,20 @@
     - name: Delete Packer AEM CodePipeline pipelines
       shell: |
         aws codepipeline delete-pipeline \
-        --name packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }} \
+        --name packer-aem-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].platform_type }}-{{ item[1].os_type }}-{{ item[2] }} \
         --region {{ aws.region }}
       with_nested:
+        - "{{ scm.repos.packer_aem.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
 
     - name: Delete Packer AEM CodeBuild projects
       shell: |
         aws codebuild delete-project \
-        --name packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }} \
+        --name packer-aem-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].platform_type }}-{{ item[1].os_type }}-{{ item[2] }}-{{ item[3] }} \
         --region {{ aws.region }}
       with_nested:
+        - "{{ scm.repos.packer_aem.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
         - "{{ ci.aws.components }}"

@@ -12,9 +12,10 @@
     - name: Generate Packer AEM CodeBuild project input JSON files
       template:
         src: ../../templates/packer-aem/codebuild-project.j2
-        dest: ../../../stage/ci-aws/packer-aem-codebuild-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }}.yaml
+        dest: ../../../stage/ci-aws/packer-aem-codebuild-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].platform_type }}-{{ item[1].os_type }}-{{ item[2] }}-{{ item[3] }}.yaml
         mode: 0644
       with_nested:
+        - "{{ scm.repos.packer_aem.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
         - "{{ ci.aws.components }}"
@@ -22,11 +23,12 @@
     - name: Create Packer AEM CodeBuild projects
       shell: |
         aws codebuild create-project \
-        --name packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }} \
-        --cli-input-json file://../../../stage/ci-aws/packer-aem-codebuild-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }}.yaml \
+        --name packer-aem-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].platform_type }}-{{ item[1].os_type }}-{{ item[2] }}-{{ item[3] }} \
+        --cli-input-json file://../../../stage/ci-aws/packer-aem-codebuild-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].platform_type }}-{{ item[1].os_type }}-{{ item[2] }}-{{ item[3] }}.yaml \
         --region {{ aws.region }} \
         --badge-enabled
       with_nested:
+        - "{{ scm.repos.packer_aem.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
         - "{{ ci.aws.components }}"
@@ -34,17 +36,19 @@
     - name: Generate Packer AEM CodePipeline pipeline input JSON files
       template:
         src: ../../templates/packer-aem/codepipeline-pipeline.j2
-        dest: ../../../stage/ci-aws/packer-aem-codepipeline-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}.yaml
+        dest: ../../../stage/ci-aws/packer-aem-codepipeline-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].platform_type }}-{{ item[1].os_type }}-{{ item[2] }}.yaml
         mode: 0644
       with_nested:
+        - "{{ scm.repos.packer_aem.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
 
     - name: Create Packer AEM CodePipeline pipelines
       shell: |
         aws codepipeline create-pipeline \
-        --cli-input-json file://../../../stage/ci-aws/packer-aem-codepipeline-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}.yaml \
+        --cli-input-json file://../../../stage/ci-aws/packer-aem-codepipeline-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].platform_type }}-{{ item[1].os_type }}-{{ item[2] }}.yaml \
         --region {{ aws.region }}
       with_nested:
+        - "{{ scm.repos.packer_aem.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"

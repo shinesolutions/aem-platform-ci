@@ -24,3 +24,11 @@ ci:
       bucket_name: overwrite-me
     iam:
       role_arn: overwrite-me
+scm:
+  repos:
+    packer_aem:
+      branches:
+        - master
+    aem_aws_stack_builder:
+      branches:
+        - master
