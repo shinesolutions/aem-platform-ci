@@ -43,12 +43,12 @@
       },
       {
         "name": "BUILD_TARGETS",
-        "value": "{{ item[1].platform_type }}-{{ item[2] }}",
+        "value": "{{ item[1].platform_type }}-{{ item[3] }}",
         "type": "PLAINTEXT"
       },
       {
         "name": "BUILD_ID",
-        "value": "ci-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].platform_type }}-{{ item[1].os_type }}-{{ item[2] }}-{{ item[2] }}",
+        "value": "ci-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].platform_type }}-{{ item[1].os_type }}-{{ item[2] }}-{{ item[3] }}",
         "type": "PLAINTEXT"
       }
     ]
