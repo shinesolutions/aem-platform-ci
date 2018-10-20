@@ -1,5 +1,5 @@
 {
-  "name": "aem-aws-stack-builder-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].os_type }}-{{ item[2] }}",
+  "name": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}",
   "description": "Run integration tests for {{ item[1].os_type }}-{{ item[2] }} from {{ item[0] }} branch",
   "serviceRole": "packer-aem-codebuild-role",
   "timeoutInMinutes": 120,
@@ -43,7 +43,7 @@
       },
       {
         "name": "BUILD_ID",
-        "value": "ci-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].os_type }}-{{ item[2] }}",
+        "value": "ci-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}",
         "type": "PLAINTEXT"
       }
     ]

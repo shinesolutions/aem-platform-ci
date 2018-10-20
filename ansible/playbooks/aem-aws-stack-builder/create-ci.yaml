@@ -12,7 +12,7 @@
     - name: Generate AEM AWS Stack Builder CodeBuild project input JSON files
       template:
         src: ../../templates/aem-aws-stack-builder/codebuild-project.j2
-        dest: ../../../stage/ci-aws/aem-aws-stack-builder-codebuild-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].os_type }}-{{ item[2] }}.yaml
+        dest: ../../../stage/ci-aws/aem-aws-stack-builder-codebuild-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}.yaml
         mode: 0644
       with_nested:
         - "{{ scm.repos.aem_aws_stack_builder.branches }}"
@@ -22,8 +22,8 @@
     - name: Create AEM AWS Stack Builder CodeBuild projects
       shell: |
         aws codebuild create-project \
-        --name aem-aws-stack-builder-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].os_type }}-{{ item[2] }} \
-        --cli-input-json file://../../../stage/ci-aws/aem-aws-stack-builder-codebuild-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].os_type }}-{{ item[2] }}.yaml \
+        --name aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }} \
+        --cli-input-json file://../../../stage/ci-aws/aem-aws-stack-builder-codebuild-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}.yaml \
         --region {{ aws.region }} \
         --badge-enabled
       with_nested:
@@ -34,7 +34,7 @@
     - name: Generate AEM AWS Stack Builder CodePipeline pipeline input JSON files
       template:
         src: ../../templates/aem-aws-stack-builder/codepipeline-pipeline.j2
-        dest: ../../../stage/ci-aws/aem-aws-stack-builder-codepipeline-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].os_type }}-{{ item[2] }}.yaml
+        dest: ../../../stage/ci-aws/aem-aws-stack-builder-codepipeline-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}.yaml
         mode: 0644
       with_nested:
         - "{{ scm.repos.aem_aws_stack_builder.branches }}"
@@ -44,7 +44,7 @@
     - name: Create AEM AWS Stack Builder CodePipeline pipelines
       shell: |
         aws codepipeline create-pipeline \
-        --cli-input-json file://../../../stage/ci-aws/aem-aws-stack-builder-codepipeline-{{ item[0] | replace("/", "_") | replace(".", "_") }}-{{ item[1].os_type }}-{{ item[2] }}.yaml \
+        --cli-input-json file://../../../stage/ci-aws/aem-aws-stack-builder-codepipeline-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}.yaml \
         --region {{ aws.region }}
       with_nested:
         - "{{ scm.repos.aem_aws_stack_builder.branches }}"
