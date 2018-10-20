@@ -26,7 +26,7 @@
                             "Repo": "packer-aem",
                             "PollForSourceChanges": "false",
                             "Branch": "{{ item[0] }}",
-                            "OAuthToken": "ad9ebc57e8daf4ece3b602afd32188e1fcae0e41"
+                            "OAuthToken": "{{ scm.access_token }}"
                         },
                         "runOrder": 1
                     }

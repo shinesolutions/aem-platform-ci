@@ -25,6 +25,7 @@ ci:
     iam:
       role_arn: overwrite-me
 scm:
+  access_token:
   repos:
     packer_aem:
       branches:
