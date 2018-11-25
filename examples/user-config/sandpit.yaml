@@ -6,8 +6,8 @@ ci:
     hosts:
       - platform_type: aws
         os_type: rhel7
-      # - platform_type: aws
-      #   os_type: amazon-linux2
+      - platform_type: aws
+        os_type: amazon-linux2
       # - platform_type: docker
       #   os_type: centos7
     s3:
@@ -21,9 +21,9 @@ scm:
       branches:
         - master
         - release/2
-        # - release/2.7
+        - release/2.7
     aem_aws_stack_builder:
       branches:
         - master
         - release/2
-        # - release/2.2
+        - release/2.2
