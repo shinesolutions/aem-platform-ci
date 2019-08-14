@@ -27,6 +27,7 @@ ci:
       role_arn: overwrite-me
 scm:
   access_token:
+  organisation: shinesolutions
   repos:
     packer_aem:
       branches:
