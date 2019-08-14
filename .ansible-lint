@@ -2,4 +2,5 @@
  skip_list:
    - 204
    - 301
+   - 404
  verbosity: 1
