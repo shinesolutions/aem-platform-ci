@@ -11,7 +11,7 @@
 
     - name: Generate Packer AEM CodeBuild project input JSON files
       template:
-        src: packer-aem/codebuild-project.j2
+        src: ../../templates/packer-aem/codebuild-project.j2
         dest: ../../../stage/ci-aws/packer-aem-codebuild-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].platform_type }}-{{ item[1].os_type }}-{{ item[2] }}-{{ item[3] }}.yaml
         mode: 0644
       with_nested:
@@ -35,7 +35,7 @@
 
     - name: Generate Packer AEM CodePipeline pipeline input JSON files
       template:
-        src: packer-aem/codepipeline-pipeline.j2
+        src: ../../templates/packer-aem/codepipeline-pipeline.j2
         dest: ../../../stage/ci-aws/packer-aem-codepipeline-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].platform_type }}-{{ item[1].os_type }}-{{ item[2] }}.yaml
         mode: 0644
       with_nested:
