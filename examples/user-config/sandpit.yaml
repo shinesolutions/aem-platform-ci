@@ -17,6 +17,7 @@ ci:
 
 scm:
   repos:
+    organisation: shinesolutions
     packer_aem:
       branches:
         - master
