@@ -11,7 +11,7 @@
 
     - name: Generate AEM AWS Stack Builder CodeBuild project input JSON files
       template:
-        src: ../../templates/aem-aws-stack-builder/codebuild-project.j2
+        src: aem-aws-stack-builder/codebuild-project.j2
         dest: ../../../stage/ci-aws/aem-aws-stack-builder-codebuild-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}.yaml
         mode: 0644
       with_nested:
@@ -33,7 +33,7 @@
 
     - name: Generate AEM AWS Stack Builder CodePipeline pipeline input JSON files
       template:
-        src: ../../templates/aem-aws-stack-builder/codepipeline-pipeline.j2
+        src: aem-aws-stack-builder/codepipeline-pipeline.j2
         dest: ../../../stage/ci-aws/aem-aws-stack-builder-codepipeline-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}.yaml
         mode: 0644
       with_nested:
