@@ -16,8 +16,8 @@ ci:
       role_arn: arn:aws:iam::918473058104:role/packer-aem-codebuild-role
 
 scm:
+  organisation: shinesolutions
   repos:
-    organisation: shinesolutions
     packer_aem:
       branches:
         - master
