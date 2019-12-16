@@ -7,8 +7,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### [Unreleased]
 
-### Changed
-- Github Organisation is now configurable so users can test their own fork
-
 ### Added
 - Initial version
