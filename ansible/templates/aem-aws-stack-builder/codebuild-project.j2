@@ -61,7 +61,7 @@
   "source": {
     "type": "GITHUB",
     "location": "https://github.com/{{ scm.organisation }}/aem-aws-stack-builder",
-    "buildspec": "buildspec/{{ item[3].name }}.yml",
+    "buildspec": "{{ item[3].buildspec }}",
     "gitCloneDepth": 1
   }
 }
