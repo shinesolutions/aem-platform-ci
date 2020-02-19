@@ -7,5 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### [Unreleased]
 
+### Change
+- Split aem aws stack builder ci into stages of build-aws-resource, build-stack-manager, cleanup-stack-manager, test-full-set and test-consolidated   
+
 ### Added
 - Initial version
+- Add configuration of codebuild
