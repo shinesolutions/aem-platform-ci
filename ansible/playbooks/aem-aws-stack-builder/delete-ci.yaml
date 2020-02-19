@@ -15,13 +15,15 @@
         - "{{ scm.repos.aem_aws_stack_builder.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
+        - "{{ codebuild.target }}"
 
     - name: Delete AEM AWS Stack Builder CodeBuild projects
       shell: |
         aws codebuild delete-project \
-        --name aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }} \
+        --name aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-{{ item[3].prefix }} \
         --region {{ aws.region }}
       with_nested:
         - "{{ scm.repos.aem_aws_stack_builder.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
+        - "{{ codebuild.target }}"
