@@ -13,6 +13,7 @@ config_path=${2}
 # directly under the directory with extension `.yaml` or `.yml` will be added.
 # The search for config files _will not_ descend into subdirectories.
 extra_vars=(--extra-vars "@ansible/inventory/group_vars/defaults.yaml")
+extra_vars+=( --extra-vars "@ansible/inventory/group_vars/codebuild.yaml")
 for config_file in $( find -L "${config_path}" -maxdepth 1 -type f -a \( -name '*.yaml' -o -name '*.yml' \) | sort ); do
   extra_vars+=( --extra-vars "@${config_file}")
 done
