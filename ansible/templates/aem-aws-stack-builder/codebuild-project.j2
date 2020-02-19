@@ -1,6 +1,6 @@
 {
-  "name": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}",
-  "description": "Run integration tests for {{ item[1].os_type }}-{{ item[2] }} from {{ item[0] }} branch",
+  "name": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-{{ item[3].prefix }}",
+  "description": "Run {{ item[3].name }} tests for {{ item[1].os_type }}-{{ item[2] }} from {{ item[0] }} branch",
   "serviceRole": "packer-aem-codebuild-role",
   "timeoutInMinutes": 240,
   "tags": [
@@ -45,13 +45,23 @@
         "name": "BUILD_ID",
         "value": "ci-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}",
         "type": "PLAINTEXT"
+      }，
+      {
+        "name": "WORK_DIR",
+        "value": "{{ codebuild.work_dir }}",
+        "type": "PLAINTEXT"
+      },
+      {
+        "name": "CONFIG_FILE",
+        "value": "{{ codebuild.config_file }}",
+        "type": "PLAINTEXT"
       }
     ]
   },
   "source": {
     "type": "GITHUB",
     "location": "https://github.com/{{ scm.organisation }}/aem-aws-stack-builder",
-    "buildspec": "buildspec.yml",
+    "buildspec": "{{ codebuild.buildspec }}",
     "gitCloneDepth": 1
   }
 }
