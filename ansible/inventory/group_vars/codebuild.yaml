@@ -1,0 +1,20 @@
+codebuild:
+  config_file: stage/user-config/zzz-test.yaml
+  target:
+    - name: build-aws-resources
+      prefix: res
+      buildspec: buildspec/build-aws-resources.yml
+      work_dir: stage/user-config/aws-resources-sandpit/
+    - name: build-stack-manager
+      prefix: sm
+      buildspec: buildspec/build-stack-manager.yml
+      work_dir: stage/user-config/aem-stack-manager-sandpit/
+    - name: cleanup-stack-manager
+      prefix: smcl
+      buildspec: buildspec/cleanup-stack-manager.yml
+    - name: create-consolidated
+      prefix: con
+      buildspec: buildspec/test-consolidated.yml
+    - name: create-full-set
+      prefix: fs
+      buildspec: buildspec/test-full-set.yml
