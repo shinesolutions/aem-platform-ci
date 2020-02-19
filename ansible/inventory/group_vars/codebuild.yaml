@@ -12,9 +12,12 @@ codebuild:
     - name: cleanup-stack-manager
       prefix: smcl
       buildspec: buildspec/cleanup-stack-manager.yml
+      work_dir: stage/user-config/aem-stack-manager-sandpit/
     - name: create-consolidated
       prefix: con
       buildspec: buildspec/test-consolidated.yml
+      work_dir: overwrite-me
     - name: create-full-set
       prefix: fs
       buildspec: buildspec/test-full-set.yml
+      work_dir: overwrite-me
