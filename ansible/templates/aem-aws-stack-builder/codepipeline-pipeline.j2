@@ -33,15 +33,15 @@
                 ]
             },
             {
-                "name": "Test",
+                "name": "Build",
                 "actions": [
                     {
                         "inputArtifacts": [
                             {
-                                "name": "{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}"
+                                "name": "{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-res"
                             }
                         ],
-                        "name": "integration-tests",
+                        "name": "Aws-Resources",
                         "actionTypeId": {
                             "category": "Build",
                             "owner": "AWS",
@@ -50,7 +50,93 @@
                         },
                         "outputArtifacts": [],
                         "configuration": {
-                            "ProjectName": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}"
+                            "ProjectName": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-res"
+                        },
+                        "runOrder": 1
+                    },
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-sm"
+                            }
+                        ],
+                        "name": "Stack-Manager",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "version": "1",
+                            "provider": "CodeBuild"
+                        },
+                        "outputArtifacts": [],
+                        "configuration": {
+                            "ProjectName": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-sm"
+                        },
+                        "runOrder": 1
+                    }
+                ]
+            },
+            {
+                "name": "Test",
+                "actions": [
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-con"
+                            }
+                        ],
+                        "name": "Consolidated",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "version": "1",
+                            "provider": "CodeBuild"
+                        },
+                        "outputArtifacts": [],
+                        "configuration": {
+                            "ProjectName": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-con"
+                        },
+                        "runOrder": 1
+                    },
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-fs"
+                            }
+                        ],
+                        "name": "Full-Set",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "version": "1",
+                            "provider": "CodeBuild"
+                        },
+                        "outputArtifacts": [],
+                        "configuration": {
+                            "ProjectName": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-fs"
+                        },
+                        "runOrder": 1
+                    }
+                ]
+            },
+            {
+                "name": "Cleanup",
+                "actions": [
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-smcl"
+                            }
+                        ],
+                        "name": "Stack-Manager",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "version": "1",
+                            "provider": "CodeBuild"
+                        },
+                        "outputArtifacts": [],
+                        "configuration": {
+                            "ProjectName": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-smcl"
                         },
                         "runOrder": 1
                     }
