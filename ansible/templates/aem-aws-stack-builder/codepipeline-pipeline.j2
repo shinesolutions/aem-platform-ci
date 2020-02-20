@@ -36,7 +36,7 @@
                 "name": "Build",
                 "actions": [
                 {% set index = {'first': True} %}
-                {% for target in codebuild.target %}
+                {% for target in aem_aws_stack_builder.target %}
                 {% if target.stage == 'build' %}
                     {% if not index.first %} ,  {% endif %}
                     {% if index.update({'first': false}) %} {% endif %}
@@ -67,7 +67,7 @@
                 "name": "Test",
                 "actions": [
                 {% set index = {'first': True} %}
-                {% for target in codebuild.target %}
+                {% for target in aem_aws_stack_builder.target %}
                 {% if target.stage == 'build' %}
                     {% if not index.first %} ,  {% endif %}
                     {% if index.update({'first': false}) %} {% endif %}
@@ -98,7 +98,7 @@
                 "name": "Cleanup",
                 "actions": [
                 {% set index = {'first': True} %}
-                {% for target in codebuild.target %}
+                {% for target in aem_aws_stack_builder.target %}
                 {% if target.stage == 'build' %}
                     {% if not index.first %} ,  {% endif %}
                     {% if index.update({'first': false}) %} {% endif %}

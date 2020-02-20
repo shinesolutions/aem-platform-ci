@@ -18,7 +18,7 @@
         - "{{ scm.repos.aem_aws_stack_builder.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
-        - "{{ codebuild.target }}"
+        - "{{ aem_aws_stack_builder.target }}"
 
     - name: Create AEM AWS Stack Builder CodeBuild projects
       shell: |
@@ -31,7 +31,7 @@
         - "{{ scm.repos.aem_aws_stack_builder.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
-        - "{{ codebuild.target }}"
+        - "{{ aem_aws_stack_builder.target }}"
 
     - name: Generate AEM AWS Stack Builder CodePipeline pipeline input JSON files
       template:

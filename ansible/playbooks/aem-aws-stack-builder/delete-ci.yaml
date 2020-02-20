@@ -15,7 +15,7 @@
         - "{{ scm.repos.aem_aws_stack_builder.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
-        - "{{ codebuild.target }}"
+        - "{{ aem_aws_stack_builder.target }}"
 
     - name: Delete AEM AWS Stack Builder CodeBuild projects
       shell: |
@@ -26,4 +26,4 @@
         - "{{ scm.repos.aem_aws_stack_builder.branches }}"
         - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
-        - "{{ codebuild.target }}"
+        - "{{ aem_aws_stack_builder.target }}"
