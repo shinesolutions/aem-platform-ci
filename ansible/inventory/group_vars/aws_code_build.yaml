@@ -11,11 +11,11 @@ aem_aws_stack_builder:
       buildspec: buildspec/build-stack-manager.yml
       work_dir: stage/user-config/aem-stack-manager-sandpit/
       stage: build
-    - name: cleanup-stack-manager
-      prefix: smcl
-      buildspec: buildspec/cleanup-stack-manager.yml
-      work_dir: stage/user-config/aem-stack-manager-sandpit/
-      stage: cleanup
+    - name: build-dns-batch
+      prefix: dns
+      buildspec: buildspec/build-dns-batch.yml
+      work_dir: overwrite-me
+      stage: build
     - name: create-consolidated
       prefix: con
       buildspec: buildspec/test-consolidated.yml
@@ -26,3 +26,13 @@ aem_aws_stack_builder:
       buildspec: buildspec/test-full-set.yml
       work_dir: overwrite-me
       stage: test
+    - name: cleanup-stack-manager
+      prefix: smcl
+      buildspec: buildspec/cleanup-stack-manager.yml
+      work_dir: stage/user-config/aem-stack-manager-sandpit/
+      stage: cleanup
+    - name: cleanup-aws-resources
+      prefix: rescl
+      buildspec: buildspec/cleanup-aws-resources.yml
+      work_dir: stage/user-config/aws-resources-sandpit/
+      stage: cleanup
