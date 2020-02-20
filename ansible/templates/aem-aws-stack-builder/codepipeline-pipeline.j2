@@ -35,8 +35,11 @@
             {
                 "name": "Build",
                 "actions": [
+                {% set index = {'first': True} %}
                 {% for target in codebuild.target %}
                 {% if target.stage == 'build' %}
+                    {% if not index.first %} ,  {% endif %}
+                    {% if index.update({'first': false}) %} {% endif %}
                     {
                         "inputArtifacts": [
                             {
@@ -56,9 +59,6 @@
                         },
                         "runOrder": 1
                     }
-                    {% if not loop.last %}
-                    ,
-                    {% endif %}
                 {% endif %}
                 {% endfor %}
                 ]
@@ -66,8 +66,11 @@
             {
                 "name": "Test",
                 "actions": [
+                {% set index = {'first': True} %}
                 {% for target in codebuild.target %}
-                {% if target.stage == 'test' %}
+                {% if target.stage == 'build' %}
+                    {% if not index.first %} ,  {% endif %}
+                    {% if index.update({'first': false}) %} {% endif %}
                     {
                         "inputArtifacts": [
                             {
@@ -87,9 +90,6 @@
                         },
                         "runOrder": 1
                     }
-                    {% if not loop.last %}
-                    ,
-                    {% endif %}
                 {% endif %}
                 {% endfor %}
                 ]
@@ -99,6 +99,11 @@
                 "actions": [
                 {% for target in codebuild.target %}
                 {% if target.stage == 'test' %}
+                {% set index = {'first': True} %}
+                {% for target in codebuild.target %}
+                {% if target.stage == 'build' %}
+                    {% if not index.first %} ,  {% endif %}
+                    {% if index.update({'first': false}) %} {% endif %}
                     {
                         "inputArtifacts": [
                             {
@@ -118,9 +123,6 @@
                         },
                         "runOrder": 1
                     }
-                    {% if not loop.last %}
-                    ,
-                    {% endif %}
                 {% endif %}
                 {% endfor %}
                 ]
