@@ -1,4 +1,4 @@
-codebuild:
+aem_aws_stack_builder:
   config_file: stage/user-config/zzz-test.yaml
   target:
     - name: build-aws-resources
