@@ -17,7 +17,9 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | scm.access_token | [GitHub Access Token for AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/GitHub-authentication.html). If none supplied, you have to use AWS Console and edit the pipeline, then connect to GitHub manually. | Optional | |
 | scm.repos.packer_aem.branches | [Packer AEM](https://github.com/shinesolutions/packer-aem) branches to be used for CodeBuild and CodePipeline resources related to creating machine images. | Optional | An array with single value `master` |
 | scm.repos.aem_aws_stack_builder.branches | [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) branches to be used for CodeBuild and CodePipeline resources related to creating AEM environments. | Optional | An array with single value `master` |
-| codebuild.config_file | The local configuration file path [AEM HelloWorld Config](https://github.com/shinesolutions/aem-helloworld-config). | Optional | `stage/user-config/zzz-test.yaml`|
-| codebuild.target.name | The target name of action for codebuild. | Optional | `build-aws-resources`, `build-stack-manager`, `cleanup-stack-manager`, `create-consolidated`, `create-full-set` |
-| codebuild.target.prefix | The prefix of stack component to manage the name of projects. | Optional | `res`, `sm`, `con`, `fs`, `smcl` | 
-| codebuild.target.work_dir | The work directory path of targets | Optional | `stage/user-config/aws-resources-sandpit/`, `stage/user-config/aem-stack-manager-sandpit/`, `overwrite-me` |
+| aem_aws_stack_builder.config_file | The local configuration file path [AEM HelloWorld Config](https://github.com/shinesolutions/aem-helloworld-config). | Optional | `stage/user-config/zzz-test.yaml`|
+| aem_aws_stack_builder.target.name | The target name of action for codebuild. | Optional | `build-aws-resources`, `build-stack-manager`, `cleanup-stack-manager`, `create-consolidated`, `create-full-set` |
+| aem_aws_stack_builder.target.prefix | The prefix of stack component to manage the name of projects. | Optional | `res`, `sm`, `con`, `fs`, `smcl` | 
+| aem_aws_stack_builder.target.work_dir | The work directory path of targets | Optional | `stage/user-config/aws-resources-sandpit/`, `stage/user-config/aem-stack-manager-sandpit/`, `overwrite-me` |
+| aem_aws_stack_builder.target.buildspec | The code build project buildspec files | Optional | |
+| aem_aws_stack_builder.target.stage | The name of codepipeline stage | Optional | `cleanup`, `build`, `test` |
