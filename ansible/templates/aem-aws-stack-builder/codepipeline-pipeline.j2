@@ -68,7 +68,7 @@
                 "actions": [
                 {% set index = {'first': True} %}
                 {% for target in aem_aws_stack_builder.target %}
-                {% if target.stage == 'build' %}
+                {% if target.stage == 'test' %}
                     {% if not index.first %} ,  {% endif %}
                     {% if index.update({'first': false}) %} {% endif %}
                     {
@@ -99,7 +99,7 @@
                 "actions": [
                 {% set index = {'first': True} %}
                 {% for target in aem_aws_stack_builder.target %}
-                {% if target.stage == 'build' %}
+                {% if target.stage == 'cleanup' %}
                     {% if not index.first %} ,  {% endif %}
                     {% if index.update({'first': false}) %} {% endif %}
                     {
