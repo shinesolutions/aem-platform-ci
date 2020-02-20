@@ -97,8 +97,6 @@
             {
                 "name": "Cleanup",
                 "actions": [
-                {% for target in codebuild.target %}
-                {% if target.stage == 'test' %}
                 {% set index = {'first': True} %}
                 {% for target in codebuild.target %}
                 {% if target.stage == 'build' %}
