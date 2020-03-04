@@ -33,15 +33,20 @@
                 ]
             },
             {
-                "name": "Test",
+                "name": "Build",
                 "actions": [
+                {% set index = {'first': True} %}
+                {% for target in aem_aws_stack_builder.target %}
+                {% if target.stage == 'build' %}
+                    {% if not index.first %} ,  {% endif %}
+                    {% if index.update({'first': false}) %} {% endif %}
                     {
                         "inputArtifacts": [
                             {
                                 "name": "{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}"
                             }
                         ],
-                        "name": "integration-tests",
+                        "name": "{{ target.name }}",
                         "actionTypeId": {
                             "category": "Build",
                             "owner": "AWS",
@@ -50,10 +55,74 @@
                         },
                         "outputArtifacts": [],
                         "configuration": {
-                            "ProjectName": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}"
+                            "ProjectName": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-{{ target.prefix }}"
                         },
                         "runOrder": 1
                     }
+                {% endif %}
+                {% endfor %}
+                ]
+            },
+            {
+                "name": "Test",
+                "actions": [
+                {% set index = {'first': True} %}
+                {% for target in aem_aws_stack_builder.target %}
+                {% if target.stage == 'test' %}
+                    {% if not index.first %} ,  {% endif %}
+                    {% if index.update({'first': false}) %} {% endif %}
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}"
+                            }
+                        ],
+                        "name": "{{ target.name }}",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "version": "1",
+                            "provider": "CodeBuild"
+                        },
+                        "outputArtifacts": [],
+                        "configuration": {
+                            "ProjectName": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-{{ target.prefix }}"
+                        },
+                        "runOrder": 1
+                    }
+                {% endif %}
+                {% endfor %}
+                ]
+            },
+            {
+                "name": "Cleanup",
+                "actions": [
+                {% set index = {'first': True} %}
+                {% for target in aem_aws_stack_builder.target %}
+                {% if target.stage == 'cleanup' %}
+                    {% if not index.first %} ,  {% endif %}
+                    {% if index.update({'first': false}) %} {% endif %}
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}"
+                            }
+                        ],
+                        "name": "{{ target.name }}",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "version": "1",
+                            "provider": "CodeBuild"
+                        },
+                        "outputArtifacts": [],
+                        "configuration": {
+                            "ProjectName": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}-{{ target.prefix }}"
+                        },
+                        "runOrder": 1
+                    }
+                {% endif %}
+                {% endfor %}
                 ]
             }
         ],

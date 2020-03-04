@@ -1,0 +1,38 @@
+aem_aws_stack_builder:
+  config_file: stage/user-config/zzz-test.yaml
+  target:
+    - name: build-aws-resources
+      prefix: res
+      buildspec: buildspec/build-aws-resources.yml
+      work_dir: stage/user-config/aws-resources-sandpit/
+      stage: build
+    - name: build-stack-manager
+      prefix: sm
+      buildspec: buildspec/build-stack-manager.yml
+      work_dir: stage/user-config/aem-stack-manager-sandpit/
+      stage: build
+    - name: build-dns-batch
+      prefix: dns
+      buildspec: buildspec/build-dns-batch.yml
+      work_dir: overwrite-me
+      stage: build
+    - name: create-consolidated
+      prefix: con
+      buildspec: buildspec/test-consolidated.yml
+      work_dir: overwrite-me
+      stage: test
+    - name: create-full-set
+      prefix: fs
+      buildspec: buildspec/test-full-set.yml
+      work_dir: overwrite-me
+      stage: test
+    - name: cleanup-stack-manager
+      prefix: smcl
+      buildspec: buildspec/cleanup-stack-manager.yml
+      work_dir: stage/user-config/aem-stack-manager-sandpit/
+      stage: cleanup
+    - name: cleanup-aws-resources
+      prefix: rescl
+      buildspec: buildspec/cleanup-aws-resources.yml
+      work_dir: stage/user-config/aws-resources-sandpit/
+      stage: cleanup
