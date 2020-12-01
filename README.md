@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/shinesolutions/aem-platform-ci.svg)](http://travis-ci.org/shinesolutions/aem-platform-ci)
+[![Build Status](https://github.com/shinesolutions/aem-platform-ci/workflows/CI/badge.svg)](https://github.com/shinesolutions/aem-platform-ci/actions?query=workflow%3ACI)
 
 AEM Platform CI
 ---------------
