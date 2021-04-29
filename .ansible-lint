@@ -1,6 +1,7 @@
- use_default_rules: true
- skip_list:
-   - 204
-   - 301
-   - 404
- verbosity: 1
+use_default_rules: true
+skip_list:
+  - experimental
+  - no-changed-when
+  - no-relative-paths
+  - yaml
+verbosity: 1

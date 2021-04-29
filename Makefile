@@ -4,7 +4,7 @@ clean:
 	rm -rf stage
 
 deps:
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
 lint:
 	ansible-lint ansible/playbooks/*/*.yaml
