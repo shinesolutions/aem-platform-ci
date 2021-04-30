@@ -18,6 +18,15 @@ Installation
   Alternatively, you can use [AEM Platform BuildEnv](https://github.com/shinesolutions/aem-platform-buildenv) Docker container to run AEM Platform CI build targets.
 - Resolve the [Python packages](https://github.com/shinesolutions/aem-platform-ci/blob/master/requirements.txt) dependencies by running `make deps`
 
+Configuration
+-------------
+
+GitHub token can be configured in `scm.access_token` property in Ansible inventory and then you can pass it via `config_path`.
+
+Alternatively, you can also pass it via environment variable `AOC_SERVICE_TOKEN`:
+
+    `AOC_SERVICE_TOKEN=<token> make create-packer-aem create-aem-aws-stack-builder config_path=<path/to/config/dir>` 
+
 Usage
 -----
 
