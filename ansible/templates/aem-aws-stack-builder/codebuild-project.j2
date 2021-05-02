@@ -2,7 +2,7 @@
   "name": "aem-aws-stack-builder-{{ item[0] | replace("/", "-") | replace(".", "-") }}-{{ item[1].os_type }}-{{ item[2] }}",
   "description": "Run integration tests for {{ item[1].os_type }}-{{ item[2] }} from {{ item[0] }} branch",
   "serviceRole": "packer-aem-codebuild-role",
-  "timeoutInMinutes": 240,
+  "timeoutInMinutes": 480,
   "tags": [
     {
       "key": "Project",
