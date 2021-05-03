@@ -12,7 +12,7 @@ Installation
 
 - Either clone AEM Platform CI `git clone https://github.com/shinesolutions/aem-platform-ci.git` or download one of the [released versions](https://github.com/shinesolutions/aem-platform-ci/releases)
 - Install the following required tools:
-  * [Python](https://www.python.org/downloads/) version 2.7.x
+  * [Python](https://www.python.org/downloads/) version 3.6.x
   * [GNU Make](https://www.gnu.org/software/make/)<br/>
 
   Alternatively, you can use [AEM Platform BuildEnv](https://github.com/shinesolutions/aem-platform-buildenv) Docker container to run AEM Platform CI build targets.
